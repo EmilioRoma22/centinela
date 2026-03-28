@@ -1,0 +1,38 @@
+[package]
+name = "centinela"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "centinela_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+tauri-plugin-clipboard-manager = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+argon2 = "0.5"
+rand = "0.8"
+base64 = "0.22"
+chacha20poly1305 = { version = "0.10", features = ["std"] }
+hkdf = "0.12"
+rusqlite = { version = "0.32", features = ["bundled", "serialize"] }
+sha2 = "0.10"
+zeroize = { version = "1", features = ["derive"] }
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.61", features = ["Foundation", "Security_Credentials_UI", "Win32_System_WinRT"] }
+windows-future = { version = "0.2", features = ["std"] }
+
